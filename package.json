@@ -1,0 +1,66 @@
+{
+  "name": "directory-jump",
+  "displayName": "directory-jump",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.52.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "directory-jump",
+      "properties": {
+        "directoryJump.aliasObj": {
+          "type": "object",
+          "default": {
+            "@": "/src"
+          }
+        },
+        "directoryJump.pathStandard": {
+          "type": "string",
+          "default": "package.json",
+          "description": "根路径基准默认为：package.json 文件"
+        },
+        "directoryJump.fileSuffix": {
+          "type": "array",
+          "default": [
+            "js",
+            "ts",
+            "vue",
+            "jsx"
+          ]
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "directory-jump.hello",
+        "title": "Hello"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.52.0",
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.0.4",
+    "@types/node": "^12.11.7",
+    "eslint": "^7.15.0",
+    "glob": "^7.1.6",
+    "mocha": "^8.1.3",
+    "typescript": "^4.1.2",
+    "vscode-test": "^1.4.1"
+  }
+}
