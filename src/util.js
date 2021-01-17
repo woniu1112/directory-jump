@@ -1,7 +1,8 @@
 const vscode = require('vscode');
 const fs = require('fs');
 const path = require('path');
-const { aliasObj, pathStandard, fileSuffix } = vscode.workspace.getConfiguration().get('directoryJump')
+const { resolve } = require('path');
+const { aliasObj, pathStandard, fileSuffix } = vscode.workspace.getConfiguration('directoryJump')
 
 /**
 * 获取当前所在工程根目录，有3种使用方法：<br>
@@ -85,8 +86,32 @@ const getSuffixJoinPath = function (projectRootPath, targetPath, linePath) {
   return joinPath
 }
 
+const setAlias = function (msg) {
+  // try {
+    let directoryJump = vscode.workspace.getConfiguration('directoryJump')
+    let convertMsg = JSON.parse(msg)
+    if (Object.prototype.toString.call(convertMsg) === '[object Object]') {
+      // let obj = Object.assign(aliasObj, convertMsg)
+      let obj = {...aliasObj, ...convertMsg}
+      console.log('obj:' + obj['@c'])
+      directoryJump.update('aliasObj', obj, true).then(() => {
+        return true
+      }).then(undefined, err => {
+        console.log('err: ' + err)
+        return false
+      })
+    } else {
+      return false
+    }
+  // } catch(err) {
+  //   console.log()
+  //   return false
+  // }  
+}
+
 module.exports = {
   getProjectPath,
   getTargetPath,
-  getSuffixJoinPath
+  getSuffixJoinPath,
+  setAlias
 }

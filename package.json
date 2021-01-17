@@ -42,8 +42,12 @@
     },
     "commands": [
       {
-        "command": "directory-jump.hello",
-        "title": "Hello"
+        "command": "directory-jump.contact",
+        "title": "dj-contact"
+      },
+      {
+        "command": "directory-jump.updateAlias",
+        "title": "dj-updateAlias"
       }
     ]
   },

@@ -1,6 +1,6 @@
 const vscode = require('vscode');
 const path = require('path');
-const { getTargetPath, getProjectPath, getSuffixJoinPath } = require('./util.js');
+const { getTargetPath, getProjectPath, getSuffixJoinPath, setAlias } = require('./util.js');
 
 /**
  * 查找文件定义的provider，匹配到了就return一个location，否则不做处理
@@ -32,24 +32,43 @@ function provideDefinition (document, position, token) {
   }
 
 }
-
+// input options
+let inputOptions = {
+  password:false, // 输入内容是否是密码
+  ignoreFocusOut:true, // 默认false，设置为true时鼠标点击别的地方输入框不会消失
+  placeHolder:'请输入要添加的别名', // 在输入框内的提示信息
+  prompt:'JSON格式：{ "@": "/src"}' // 在输入框下方的提示信息
+}
 
 /**
  * @param {vscode.ExtensionContext} context
  */
 function activate (context) {
-  context.subscriptions.push(vscode.languages.registerDefinitionProvider(['json', 'javascript', 'vue'], {
+  // 定义跳转
+  let provideDefinitionJump = vscode.languages.registerDefinitionProvider([
+    'javascript', 'vue', 'css', 'javascriptreact', 'typescriptreact', 'less', 'scss'], {
     provideDefinition
-  }))
-
-  let disposable = vscode.commands.registerCommand('directory-jump.hello', function () {
+  })
+  // 命令 dj-contact 作者联系方式
+  let disposable = vscode.commands.registerCommand('directory-jump.contact', function () {
     vscode.window.showInformationMessage('对于 directory-jump 如有什么问题请联系作者 yonglei.shang, email: syl18188@163.com!')
   })
+  // 设置别名
+  let updateAlias = vscode.commands.registerCommand('directory-jump.updateAlias', function () {
+    vscode.window.showInputBox(inputOptions).then(function (msg) {
+      console.log("用户输入："+msg)
+      let isOk = setAlias(msg)
+      if (isOk) {
+        vscode.window.showInformationMessage('恭喜您设置成功！')
+      } else {
+        vscode.window.showErrorMessage('抱歉设置失败，请按照提示中的格式添加！')
+      }
+    })
+  })
 
-  context.subscriptions.push(disposable)
+  context.subscriptions.push(disposable, provideDefinitionJump, updateAlias)
 }
 
-// this method is called when your extension is deactivated
 function deactivate () { }
 
 module.exports = {
