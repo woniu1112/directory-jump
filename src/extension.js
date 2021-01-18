@@ -34,10 +34,10 @@ function provideDefinition (document, position, token) {
 }
 // input options
 let inputOptions = {
-  password:false, // 输入内容是否是密码
-  ignoreFocusOut:true, // 默认false，设置为true时鼠标点击别的地方输入框不会消失
-  placeHolder:'请输入要添加的别名', // 在输入框内的提示信息
-  prompt:'JSON格式：{ "@": "/src"}' // 在输入框下方的提示信息
+  password: false, // 输入内容是否是密码
+  ignoreFocusOut: true, // 默认false，设置为true时鼠标点击别的地方输入框不会消失
+  placeHolder: '请输入要添加的别名', // 在输入框内的提示信息
+  prompt: 'JSON格式：{ "@": "/src"}' // 在输入框下方的提示信息
 }
 
 /**
@@ -50,19 +50,13 @@ function activate (context) {
     provideDefinition
   })
   // 命令 dj-contact 作者联系方式
-  let disposable = vscode.commands.registerCommand('directory-jump.contact', function () {
-    vscode.window.showInformationMessage('对于 directory-jump 如有什么问题请联系作者 yonglei.shang, email: syl18188@163.com!')
+  let disposable = vscode.commands.registerCommand('file-jump.contact', function () {
+    vscode.window.showInformationMessage('对于 file-jump 如有什么问题请联系作者 yonglei.shang, email: syl18188@163.com!')
   })
   // 设置别名
-  let updateAlias = vscode.commands.registerCommand('directory-jump.updateAlias', function () {
+  let updateAlias = vscode.commands.registerCommand('file-jump.updateAlias', function () {
     vscode.window.showInputBox(inputOptions).then(function (msg) {
-      console.log("用户输入："+msg)
-      let isOk = setAlias(msg)
-      if (isOk) {
-        vscode.window.showInformationMessage('恭喜您设置成功！')
-      } else {
-        vscode.window.showErrorMessage('抱歉设置失败，请按照提示中的格式添加！')
-      }
+      setAlias(msg)
     })
   })
 

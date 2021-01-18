@@ -1,6 +1,6 @@
 {
-  "name": "directory-jump",
-  "displayName": "directory-jump",
+  "name": "file-jump",
+  "displayName": "file-jump",
   "description": "",
   "version": "0.0.1",
   "engines": {
@@ -16,38 +16,41 @@
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "directory-jump",
+      "title": "file-jump",
       "properties": {
-        "directoryJump.aliasObj": {
+        "fileJump.aliasObj": {
           "type": "object",
           "default": {
             "@": "/src"
           }
         },
-        "directoryJump.pathStandard": {
+        "fileJump.pathStandard": {
           "type": "string",
           "default": "package.json",
           "description": "根路径基准默认为：package.json 文件"
         },
-        "directoryJump.fileSuffix": {
+        "fileJump.fileSuffix": {
           "type": "array",
           "default": [
             "js",
             "ts",
             "vue",
-            "jsx"
+            "jsx",
+            "css",
+            "scss",
+            "less"
           ]
         }
       }
     },
     "commands": [
       {
-        "command": "directory-jump.contact",
-        "title": "dj-contact"
+        "command": "file-jump.contact",
+        "title": "fj-contact"
       },
       {
-        "command": "directory-jump.updateAlias",
-        "title": "dj-updateAlias"
+        "command": "file-jump.updateAlias",
+        "title": "fj-updateAlias"
       }
     ]
   },
