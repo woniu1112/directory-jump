@@ -3,6 +3,7 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+file-jump-*
 
 # Editor directories and files
 .idea
