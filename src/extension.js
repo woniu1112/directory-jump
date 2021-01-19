@@ -46,7 +46,7 @@ let inputOptions = {
 function activate (context) {
   // 定义跳转
   let provideDefinitionJump = vscode.languages.registerDefinitionProvider([
-    'javascript', 'vue', 'css', 'javascriptreact', 'typescriptreact', 'less', 'scss'], {
+    'javascript', 'vue', 'css', 'typescript', 'javascriptreact', 'typescriptreact', 'less', 'scss'], {
     provideDefinition
   })
   // 命令 dj-contact 作者联系方式
