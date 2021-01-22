@@ -1,6 +1,6 @@
 const vscode = require('vscode');
 const path = require('path');
-const { getTargetPath, getProjectPath, getSuffixJoinPath, setAlias } = require('./util.js');
+const { getTargetPath, getProjectPath, getSuffixJoinPath, setAlias, lookAliasObj } = require('./util.js');
 
 /**
  * 查找文件定义的provider，匹配到了就return一个location，否则不做处理
@@ -10,6 +10,7 @@ const { getTargetPath, getProjectPath, getSuffixJoinPath, setAlias } = require('
  * @param {*} token 
  */
 function provideDefinition (document, position, token) {
+  console.dir('document: ', document)
   const fileName = document.fileName;
   const workDir = path.dirname(fileName);
   // const word = document.getText(document.getWordRangeAtPosition(position));
@@ -49,7 +50,7 @@ function activate (context) {
     'javascript', 'vue', 'css', 'typescript', 'javascriptreact', 'typescriptreact', 'less', 'scss'], {
     provideDefinition
   })
-  // 命令 dj-contact 作者联系方式
+  // 命令 fj-contact 作者联系方式
   let disposable = vscode.commands.registerCommand('file-jump.contact', function () {
     vscode.window.showInformationMessage('对于 file-jump 如有什么问题请联系作者 yonglei.shang, email: syl18188@163.com!')
   })
@@ -59,8 +60,12 @@ function activate (context) {
       setAlias(msg)
     })
   })
+  // 命令 fj-lookAlias 查看当前设置的别名
+  let fjLookAlias = vscode.commands.registerCommand('file-jump.lookAlias', function () {
+    vscode.window.showInformationMessage('当前设置的别名：' + lookAliasObj())
+  })
 
-  context.subscriptions.push(disposable, provideDefinitionJump, updateAlias)
+  context.subscriptions.push(disposable, provideDefinitionJump, updateAlias, fjLookAlias)
 }
 
 function deactivate () { }

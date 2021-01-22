@@ -64,6 +64,8 @@ const getSuffixJoinPath = function (projectRootPath, targetPath, linePath) {
   let joinPath = ''
   if (linePath) {
     let extname = path.extname(targetPath)
+    console.log('linePath: ' + linePath)
+    console.log('targetPath: ' + path.join(projectRootPath, `node_modules/${linePath}/package.json`))
     if (linePath.indexOf('/') === -1 && fs.existsSync(path.join(projectRootPath, `node_modules/${linePath}/package.json`))) {
       joinPath = path.join(projectRootPath, `node_modules/${linePath}/package.json`)
     } else if (!extname) {
@@ -104,9 +106,14 @@ const setAlias = function (msg) {
   }
 }
 
+const lookAliasObj = function () {
+  return JSON.stringify(aliasObj)
+}
+
 module.exports = {
   getProjectPath,
   getTargetPath,
   getSuffixJoinPath,
-  setAlias
+  setAlias,
+  lookAliasObj
 }

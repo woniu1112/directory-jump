@@ -2,7 +2,7 @@
   "name": "file-jump",
   "displayName": "file-jump",
   "description": "这是一款根据文件路径跳转到对应的文件的vscode插件",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "woniu1112",
   "engines": {
     "vscode": "^1.52.0"
@@ -53,6 +53,10 @@
       {
         "command": "file-jump.updateAlias",
         "title": "fj-updateAlias"
+      },
+      {
+        "command": "file-jump.lookAlias",
+        "title": "fj-lookAlias"
       }
     ]
   },
