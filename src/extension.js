@@ -29,7 +29,7 @@ function provideDefinition (document, position, token) {
   if (suffixJoinPath) {
     return new vscode.Location(vscode.Uri.file(suffixJoinPath), new vscode.Position(0, 0));
   } else {
-    vscode.window.showErrorMessage('获取工程路径异常！')
+    // vscode.window.showErrorMessage('获取工程路径异常！')
   }
 
 }
