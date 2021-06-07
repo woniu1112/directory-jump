@@ -1,7 +1,7 @@
 {
   "name": "file-jump",
   "displayName": "file-jump",
-  "description": "这是一款根据文件路径跳转到对应的文件的vscode插件",
+  "description": "别名跳转插件，根据文件路径跳转到对应的文件的vscode插件",
   "version": "0.0.6",
   "publisher": "woniu1112",
   "engines": {
